@@ -3,7 +3,7 @@
 	"name": "google-docs-mcp",
 	"title": "Google Docs MCP - AI-Powered Document Automation",
 	"description": "Comprehensive Google Docs integration Actor with Model Context Protocol (MCP) support. Read, write, create, analyze documents programmatically. Perfect for AI assistants, automation workflows, and intelligent document processing. Supports batch operations, content analysis, collaborative editing, and more.",
-	"version": "1.0.0",
+	"version": "0.1",
 	"buildTag": "latest",
 	"meta": {
 		"templateId": "google-docs-mcp",
@@ -21,7 +21,7 @@
 			"document-processing"
 		]
 	},
-	"input": "./.actor/INPUT_SCHEMA.json",
+	"input": "./INPUT_SCHEMA.json",
 	"storages": {
 		"dataset": {
 			"actorSpecification": 1,

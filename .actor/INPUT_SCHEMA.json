@@ -29,30 +29,29 @@
       "editor": "json",
       "properties": {
         "type": {
+          "title": "Credential Type",
           "type": "string",
+          "description": "Choose between Service Account or OAuth2 authentication",
           "enum": ["service_account", "oauth2"],
-          "default": "service_account"
+          "editor": "select"
         },
         "serviceAccountJson": {
           "title": "Service Account JSON",
           "type": "string",
           "description": "Paste your Google Service Account JSON credentials here",
-          "editor": "textarea",
-          "isSecret": true
+          "editor": "textarea"
         },
         "oauthToken": {
           "title": "OAuth Access Token",
           "type": "string",
           "description": "OAuth 2.0 access token (for personal accounts)",
-          "editor": "textfield",
-          "isSecret": true
+          "editor": "textfield"
         },
         "oauthRefreshToken": {
           "title": "OAuth Refresh Token",
           "type": "string",
           "description": "OAuth 2.0 refresh token for automatic token renewal",
-          "editor": "textfield",
-          "isSecret": true
+          "editor": "textfield"
         }
       },
       "required": []
@@ -91,13 +90,17 @@
       "editor": "json",
       "properties": {
         "index": {
+          "title": "Character Index",
           "type": "integer",
-          "description": "Character index position (1 = start of document)"
+          "description": "Character index position (1 = start of document)",
+          "editor": "number"
         },
         "location": {
+          "title": "Insertion Location",
           "type": "string",
           "enum": ["start", "end", "replace_all"],
-          "description": "Predefined locations"
+          "description": "Predefined locations",
+          "editor": "select"
         }
       }
     },
@@ -108,23 +111,42 @@
       "editor": "json",
       "properties": {
         "bold": {
-          "type": "boolean"
+          "title": "Bold",
+          "type": "boolean",
+          "description": "Apply bold formatting to text",
+          "editor": "checkbox"
         },
         "italic": {
-          "type": "boolean"
+          "title": "Italic",
+          "type": "boolean",
+          "description": "Apply italic formatting to text",
+          "editor": "checkbox"
         },
         "fontSize": {
-          "type": "number"
+          "title": "Font Size",
+          "type": "integer",
+          "description": "Size of the font in points",
+          "editor": "number",
+          "minimum": 1,
+          "maximum": 400
         },
         "fontFamily": {
-          "type": "string"
+          "title": "Font Family",
+          "type": "string",
+          "description": "Name of the font family (e.g., Arial, Times New Roman)",
+          "editor": "textfield"
         },
         "foregroundColor": {
+          "title": "Text Color",
           "type": "string",
-          "description": "Hex color code (e.g., #FF0000)"
+          "description": "Hex color code (e.g., #FF0000)",
+          "editor": "textfield"
         },
         "backgroundColor": {
-          "type": "string"
+          "title": "Background Color",
+          "type": "string",
+          "description": "Hex color code (e.g., #FFFF00)",
+          "editor": "textfield"
         }
       }
     },
@@ -135,29 +157,34 @@
       "editor": "json",
       "properties": {
         "extractKeywords": {
+          "title": "Extract Keywords",
           "type": "boolean",
           "description": "Extract key phrases and terms",
-          "default": false
+          "editor": "checkbox"
         },
         "summarize": {
+          "title": "Generate Summary",
           "type": "boolean",
           "description": "Generate document summary",
-          "default": false
+          "editor": "checkbox"
         },
         "wordCount": {
+          "title": "Word Count",
           "type": "boolean",
           "description": "Count words and characters",
-          "default": true
+          "editor": "checkbox"
         },
         "extractLinks": {
+          "title": "Extract Links",
           "type": "boolean",
           "description": "Extract all URLs from document",
-          "default": false
+          "editor": "checkbox"
         },
         "detectLanguage": {
+          "title": "Detect Language",
           "type": "boolean",
           "description": "Detect document language",
-          "default": false
+          "editor": "checkbox"
         }
       }
     },
@@ -174,20 +201,26 @@
       "editor": "json",
       "properties": {
         "shareWithEmails": {
+          "title": "Email Addresses",
           "type": "array",
           "description": "Email addresses to share with",
+          "editor": "stringList",
           "items": {
             "type": "string"
           }
         },
         "role": {
+          "title": "Permission Role",
           "type": "string",
           "enum": ["reader", "writer", "commenter"],
-          "description": "Permission level"
+          "description": "Permission level",
+          "editor": "select"
         },
         "sendNotification": {
+          "title": "Send Notification",
           "type": "boolean",
-          "description": "Send email notification to users"
+          "description": "Send email notification to users",
+          "editor": "checkbox"
         }
       }
     },
@@ -198,18 +231,22 @@
       "editor": "json",
       "properties": {
         "enableServer": {
+          "title": "Enable MCP Server",
           "type": "boolean",
           "description": "Enable MCP server mode",
-          "default": true
+          "editor": "checkbox"
         },
         "serverPort": {
+          "title": "Server Port",
           "type": "integer",
           "description": "Port for MCP server (if applicable)",
-          "default": 8080
+          "editor": "number"
         },
         "allowedTools": {
+          "title": "Allowed MCP Tools",
           "type": "array",
           "description": "MCP tools to expose",
+          "editor": "select",
           "items": {
             "type": "string",
             "enum": [
@@ -223,6 +260,7 @@
           }
         },
         "webhookUrl": {
+          "title": "Webhook URL",
           "type": "string",
           "description": "Webhook URL for notifications",
           "editor": "textfield"
@@ -238,13 +276,22 @@
         "type": "object",
         "properties": {
           "operation": {
-            "type": "string"
+            "title": "Operation Type",
+            "type": "string",
+            "editor": "textfield",
+            "description": "Type of operation to perform"
           },
           "documentId": {
-            "type": "string"
+            "title": "Document ID",
+            "type": "string",
+            "editor": "textfield",
+            "description": "Google Docs document ID"
           },
           "params": {
-            "type": "object"
+            "title": "Operation Parameters",
+            "type": "object",
+            "editor": "json",
+            "description": "Parameters specific to the operation"
           }
         }
       }
