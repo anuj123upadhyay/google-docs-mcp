@@ -1,0 +1,77 @@
+{
+	"actorSpecification": 1,
+	"name": "google-docs-mcp",
+	"title": "Google Docs MCP - AI-Powered Document Automation",
+	"description": "Comprehensive Google Docs integration Actor with Model Context Protocol (MCP) support. Read, write, create, analyze documents programmatically. Perfect for AI assistants, automation workflows, and intelligent document processing. Supports batch operations, content analysis, collaborative editing, and more.",
+	"version": "1.0.0",
+	"buildTag": "latest",
+	"meta": {
+		"templateId": "google-docs-mcp",
+		"categories": ["AUTOMATION", "DEVELOPER_TOOLS", "MARKETING", "BUSINESS"],
+		"keywords": [
+			"google-docs",
+			"google-workspace",
+			"mcp",
+			"model-context-protocol",
+			"ai-integration",
+			"document-automation",
+			"content-generation",
+			"text-analysis",
+			"collaborative-editing",
+			"document-processing"
+		]
+	},
+	"input": "./.actor/INPUT_SCHEMA.json",
+	"storages": {
+		"dataset": {
+			"actorSpecification": 1,
+			"views": {
+				"overview": {
+					"title": "Overview",
+					"transformation": {
+						"fields": [
+							"operation",
+							"documentId",
+							"title",
+							"success",
+							"wordCount",
+							"documentUrl"
+						]
+					},
+					"display": {
+						"component": "table"
+					}
+				},
+				"documents": {
+					"title": "Documents",
+					"transformation": {
+						"fields": [
+							"documentId",
+							"title",
+							"documentUrl",
+							"modifiedTime",
+							"characterCount"
+						]
+					},
+					"display": {
+						"component": "table"
+					}
+				},
+				"analysis": {
+					"title": "Analysis Results",
+					"transformation": {
+						"fields": [
+							"documentId",
+							"title",
+							"analysis"
+						]
+					},
+					"display": {
+						"component": "table"
+					}
+				}
+			}
+		}
+	},
+	"dockerfile": "../Dockerfile"
+}

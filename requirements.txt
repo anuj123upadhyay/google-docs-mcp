@@ -1,0 +1,15 @@
+# Feel free to add your Python dependencies below. For formatting guidelines, see:
+# https://pip.pypa.io/en/latest/reference/requirements-file-format/
+
+apify < 4.0.0
+pydantic < 2.10.0  # Compatibility fix for crawlee/pydantic issue
+
+# Google API dependencies
+google-auth >= 2.25.0
+google-auth-oauthlib >= 1.2.0
+google-auth-httplib2 >= 0.2.0
+google-api-python-client >= 2.110.0
+
+# Additional utilities
+aiofiles >= 23.2.1
+python-dateutil >= 2.8.2

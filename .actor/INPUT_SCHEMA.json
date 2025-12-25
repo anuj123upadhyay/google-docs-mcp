@@ -1,0 +1,287 @@
+{
+  "title": "Google Docs MCP Actor Input",
+  "description": "Configure the Google Docs MCP Actor to interact with Google Docs through AI-powered automation",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "operation": {
+      "title": "Operation Type",
+      "type": "string",
+      "description": "Select the operation you want to perform on Google Docs",
+      "enum": [
+        "read_document",
+        "write_document",
+        "create_document",
+        "update_document",
+        "list_documents",
+        "analyze_document",
+        "search_content",
+        "batch_operations",
+        "mcp_server"
+      ],
+      "default": "mcp_server",
+      "editor": "select"
+    },
+    "googleCredentials": {
+      "title": "Google API Credentials",
+      "type": "object",
+      "description": "Google Service Account credentials or OAuth tokens",
+      "editor": "json",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["service_account", "oauth2"],
+          "default": "service_account"
+        },
+        "serviceAccountJson": {
+          "title": "Service Account JSON",
+          "type": "string",
+          "description": "Paste your Google Service Account JSON credentials here",
+          "editor": "textarea",
+          "isSecret": true
+        },
+        "oauthToken": {
+          "title": "OAuth Access Token",
+          "type": "string",
+          "description": "OAuth 2.0 access token (for personal accounts)",
+          "editor": "textfield",
+          "isSecret": true
+        },
+        "oauthRefreshToken": {
+          "title": "OAuth Refresh Token",
+          "type": "string",
+          "description": "OAuth 2.0 refresh token for automatic token renewal",
+          "editor": "textfield",
+          "isSecret": true
+        }
+      },
+      "required": []
+    },
+    "documentId": {
+      "title": "Document ID",
+      "type": "string",
+      "description": "Google Docs document ID (from URL: https://docs.google.com/document/d/DOCUMENT_ID/edit)",
+      "editor": "textfield"
+    },
+    "documentIds": {
+      "title": "Multiple Document IDs",
+      "type": "array",
+      "description": "List of document IDs for batch operations",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "content": {
+      "title": "Content",
+      "type": "string",
+      "description": "Text content to write/insert into the document",
+      "editor": "textarea"
+    },
+    "documentTitle": {
+      "title": "Document Title",
+      "type": "string",
+      "description": "Title for new documents",
+      "editor": "textfield"
+    },
+    "insertPosition": {
+      "title": "Insert Position",
+      "type": "object",
+      "description": "Where to insert content in the document",
+      "editor": "json",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "description": "Character index position (1 = start of document)"
+        },
+        "location": {
+          "type": "string",
+          "enum": ["start", "end", "replace_all"],
+          "description": "Predefined locations"
+        }
+      }
+    },
+    "formatting": {
+      "title": "Text Formatting",
+      "type": "object",
+      "description": "Apply formatting to inserted text",
+      "editor": "json",
+      "properties": {
+        "bold": {
+          "type": "boolean"
+        },
+        "italic": {
+          "type": "boolean"
+        },
+        "fontSize": {
+          "type": "number"
+        },
+        "fontFamily": {
+          "type": "string"
+        },
+        "foregroundColor": {
+          "type": "string",
+          "description": "Hex color code (e.g., #FF0000)"
+        },
+        "backgroundColor": {
+          "type": "string"
+        }
+      }
+    },
+    "analysisOptions": {
+      "title": "Document Analysis Options",
+      "type": "object",
+      "description": "Configure document analysis features",
+      "editor": "json",
+      "properties": {
+        "extractKeywords": {
+          "type": "boolean",
+          "description": "Extract key phrases and terms",
+          "default": false
+        },
+        "summarize": {
+          "type": "boolean",
+          "description": "Generate document summary",
+          "default": false
+        },
+        "wordCount": {
+          "type": "boolean",
+          "description": "Count words and characters",
+          "default": true
+        },
+        "extractLinks": {
+          "type": "boolean",
+          "description": "Extract all URLs from document",
+          "default": false
+        },
+        "detectLanguage": {
+          "type": "boolean",
+          "description": "Detect document language",
+          "default": false
+        }
+      }
+    },
+    "searchQuery": {
+      "title": "Search Query",
+      "type": "string",
+      "description": "Search for specific text in documents",
+      "editor": "textfield"
+    },
+    "shareSettings": {
+      "title": "Document Sharing Settings",
+      "type": "object",
+      "description": "Configure document permissions",
+      "editor": "json",
+      "properties": {
+        "shareWithEmails": {
+          "type": "array",
+          "description": "Email addresses to share with",
+          "items": {
+            "type": "string"
+          }
+        },
+        "role": {
+          "type": "string",
+          "enum": ["reader", "writer", "commenter"],
+          "description": "Permission level"
+        },
+        "sendNotification": {
+          "type": "boolean",
+          "description": "Send email notification to users"
+        }
+      }
+    },
+    "mcpServerConfig": {
+      "title": "MCP Server Configuration",
+      "type": "object",
+      "description": "Configure Model Context Protocol server settings",
+      "editor": "json",
+      "properties": {
+        "enableServer": {
+          "type": "boolean",
+          "description": "Enable MCP server mode",
+          "default": true
+        },
+        "serverPort": {
+          "type": "integer",
+          "description": "Port for MCP server (if applicable)",
+          "default": 8080
+        },
+        "allowedTools": {
+          "type": "array",
+          "description": "MCP tools to expose",
+          "items": {
+            "type": "string",
+            "enum": [
+              "read_document",
+              "write_document",
+              "create_document",
+              "search_documents",
+              "analyze_content",
+              "list_documents"
+            ]
+          }
+        },
+        "webhookUrl": {
+          "type": "string",
+          "description": "Webhook URL for notifications",
+          "editor": "textfield"
+        }
+      }
+    },
+    "batchOperations": {
+      "title": "Batch Operations",
+      "type": "array",
+      "description": "Execute multiple operations in sequence",
+      "editor": "json",
+      "items": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string"
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "outputFormat": {
+      "title": "Output Format",
+      "type": "string",
+      "description": "How to format the results",
+      "enum": ["json", "markdown", "plain_text", "html"],
+      "default": "json",
+      "editor": "select"
+    },
+    "maxRetries": {
+      "title": "Maximum Retries",
+      "type": "integer",
+      "description": "Number of retry attempts for API calls",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 3,
+      "editor": "number"
+    },
+    "rateLimitDelay": {
+      "title": "Rate Limit Delay (ms)",
+      "type": "integer",
+      "description": "Delay between API requests in milliseconds",
+      "minimum": 0,
+      "maximum": 5000,
+      "default": 100,
+      "editor": "number"
+    },
+    "verbose": {
+      "title": "Verbose Logging",
+      "type": "boolean",
+      "description": "Enable detailed logging for debugging",
+      "default": false,
+      "editor": "checkbox"
+    }
+  },
+  "required": ["operation", "googleCredentials"]
+}
