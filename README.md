@@ -566,6 +566,6 @@ MIT License - Free to use and modify for the Apify 1 Million Challenge
 
 ---
 
-**Built with ❤️ for the Apify 1 Million Challenge**
+**Built with ❤️ for the Apify **
 
 *Make your Google Docs intelligent, automated, and AI-ready!*
